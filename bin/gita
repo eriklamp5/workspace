@@ -1,0 +1,26 @@
+#!/bin/bash
+
+cd "$(git rev-parse --show-toplevel)"
+
+if [[ "$#" == 0 ]] ; then
+  index=1
+else
+  index="$1"
+  shift
+fi
+
+filename="$( git status --porcelain | sed -nr '/^.[MTDRC?]/p' | sed "${index}q;d" | cut -c 4- )"
+
+if [[ $filename == *" -> "* ]] ; then
+  filename="$( sed 's/.* -> //' <<<"$filename" )"
+fi
+
+#echo "index ${index}"
+#echo "args '$@'"
+#echo "filename '${filename}'"
+
+if test -z "${filename}" ; then
+  echo "index out of bounds (${index})"
+else
+  git add "${filename}" "$@"
+fi

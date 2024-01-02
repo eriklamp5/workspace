@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ "$#" -ne 0 ]] ; then
+    exec git branch "$@"
+else
+    exec git branch --list
+fi

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+container="$1"
+shift
+exec kubectl exec --stdin --tty "$(kubectl get pods -n=testbox -o=name | grep "$container" )" -- /bin/bash $@
