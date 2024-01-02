@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# PS1='\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]$ '
+PS1='\033[35m\A \033[33m\w\033[36m`__git_ps1` \033[0m$ '
+export PS1
+
+SOURCE=${BASH_SOURCE[0]}
+while [ -L "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
+  SOURCE=$(readlink "$SOURCE")
+  [[ $SOURCE != /* ]] && SOURCE=$DIR/$SOURCE # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
+
+if [ -d $DIR/bin ]; then
+    [[ ":$PATH:" != *":$DIR/bin:"* ]] && PATH="$DIR/bin:$PATH"
+fi
+
+export PATH
+
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+alias lsl='ls -lF'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+
+
