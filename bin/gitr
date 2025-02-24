@@ -3,5 +3,6 @@
 if [[ "$#" -ne 0 ]] ; then
     exec git rebase -i "$@"
 else
- exec git rebase -i "$( git branch | grep -o -m1 "\b\(master\|main\)\b" )"
+ exec git rebase -i "$( git status --branch --porcelain=2 | grep "branch.upstream" | cut -d ' ' -f 3 )^"
 fi
+

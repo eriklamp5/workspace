@@ -2,4 +2,8 @@
 
 container="$1"
 shift
-exec kubectl logs --namespace=testbox "$(kubectl get pods -o=name --namespace=testbox | grep "$container" )" "$@"
+namespace="$1"
+shift
+
+exec kubectl logs --namespace="$namespace" "$(kubefind "$container" "$namespace")" "$@"
+

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+container="$1"
+shift
+namespace="$1"
+shift
+
+while IFS= read -r line; do
+    temp="${line#pod/}"
+    # echo "${temp%-[^-]*-[^-]*} ${container} ${temp} ${line}"
+    if [[ "${temp%-[^-]*-[^-]*}" == "$container" ]] ; then
+        echo $line
+        exit
+    fi
+done <<< "$(kubectl get pods -o=name --namespace="$namespace")"
+

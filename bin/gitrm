@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [[ "$#" -ne 0 ]] ; then
+    exec git rebase -i "$@"
+else
+ exec git rebase -i "$( git branch | grep -o -m1 "\b\(master\|main\)\b" )"
+fi

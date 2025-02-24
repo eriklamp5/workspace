@@ -1,0 +1,11 @@
+#!/bin/bash
+
+container="$1"
+shift
+namespace="$1"
+shift
+port="$1"
+shift
+
+exec kubectl port-forward --namespace="$namespace" "$(kubefind "$container" "$namespace")" "$port" "$@"
+
