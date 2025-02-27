@@ -11,3 +11,18 @@ Short referenced command collection:
 - `git config core.sshCommand 'ssh -i ~/.ssh/<your_key>'`
 
 
+
+Host git_eriklamp5
+    Hostname github.com
+    IdentityFile ~/.ssh/eriklamp5_legion
+    IdentitiesOnly yes
+
+Host git_rdjrjqouqcu
+    Hostname github.com
+    IdentityFile ~/.ssh/rdjrjqoucu_legion
+    IdentitiesOnly yes
+
+origin  git@git_eriklamp5:eriklamp5/workspace.git (fetch)
+origin  git@git_eriklamp5:eriklamp5/workspace.git (push)
+
+
